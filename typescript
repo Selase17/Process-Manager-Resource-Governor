@@ -1,0 +1,61 @@
+Script started on 2026-04-01 00:04:36+02:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="80" LINES="45"]
+[1m[7m%[27m[1m[0m                                                                                ]2;pasel@KoJo:/mnt/c/Users/pasel/OneDrive/Desktop/DevOps_Projects/Linux_SysAdmin/Process-Manager-Resource-Governor]1;..urce-Governor]7;file://KoJo/mnt/c/Users/pasel/OneDrive/Desktop/DevOps_Projects/Linux_SysAdmin/Process-Manager-Resource-Governor\[0m[27m[24m[J[01;32m➜  [36mProcess-Manager-Resource-Governor[00m [K[?1h=[?2004h[0m[27m[24m[J[01;32m➜  [36mProcess-Manager-Resource-Governor[00m [01;34mgit:([31mmain[34m) [33m✗[00m [K../procgov.sh --help[?1l>[?2004l
+]2;./procgov.sh --help]1;./procgov.sh
+\033[1mprocgov.sh\033[0m v1.0.0 — Process Manager & Resource Governor
+
+\033[1mUSAGE:\033[0m
+  sudo bash procgov.sh [OPTIONS]
+
+\033[1mOPTIONS:\033[0m
+  --cpu <percent>       CPU threshold % before tracking starts     (default: 80)
+  --mem <percent>       Memory threshold % before tracking starts  (default: 70)
+  --duration <seconds>  Seconds over threshold before kill         (default: 30)
+  --interval <seconds>  Polling interval in seconds                (default: 5)
+  --config <file>       Path to config file                        (default: procgov.conf)
+  --whitelist <file>    Path to whitelist file                     (default: whitelist.txt)
+  --log <file>          Path to log file                           (default: procgov.log)
+  --dry-run             Report what WOULD be killed, without acting
+  --summary             Print a weekly kill summary from the log and exit
+  --help                Show this help message
+
+\033[1mEXAMPLES:\033[0m
+  sudo bash procgov.sh
+  sudo bash procgov.sh --cpu 90 --mem 80 --duration 60
+  sudo bash procgov.sh --dry-run --interval 2
+  sudo bash procgov.sh --config /etc/procgov.conf --log /var/log/procgov.log
+  bash procgov.sh --summary --log /var/log/procgov.log
+
+[1m[7m%[27m[1m[0m                                                                                ]2;pasel@KoJo:/mnt/c/Users/pasel/OneDrive/Desktop/DevOps_Projects/Linux_SysAdmin/Process-Manager-Resource-Governor]1;..urce-Governor]7;file://KoJo/mnt/c/Users/pasel/OneDrive/Desktop/DevOps_Projects/Linux_SysAdmin/Process-Manager-Resource-Governor\[0m[27m[24m[J[01;32m➜  [36mProcess-Manager-Resource-Governor[00m [01;34mgit:([31mmain[34m) [33m✗[00m [K[?1h=[?2004hssudo ./procgov.sh --dry-run -- [Kdduration 10 --interval 2[?1l>[?2004l
+]2;sudo ./procgov.sh --dry-run --duration 10 --interval 2]1;./procgov.sh[sudo] password for pasel: 
+[0;36m[INFO][0m  2026-04-01 00:07:58 — Loading config from 'procgov.conf'...
+[0;36m[INFO][0m  2026-04-01 00:07:58 — Loading whitelist from 'whitelist.txt'...
+[0;36m[INFO][0m  2026-04-01 00:07:58 — Whitelist loaded: 14 protected process(es): systemd init sshd bash sh cron rsyslogd dbus-daemon NetworkManager containerd dockerd ps awk sleep
+[0;36m[INFO][0m  2026-04-01 00:07:58 — Starting process governor. CPU>=80% | MEM>=70% | DURATION=10s | INTERVAL=2s
+[0;36m[INFO][0m  2026-04-01 00:07:58 — Log file: procgov.log
+[1;33m[WARN][0m  2026-04-01 00:07:58 — DRY-RUN mode enabled — no processes will be killed.
+[1;33m[WARN][0m  2026-04-01 00:08:53 — PID 101427 (yes) over threshold [CPU=99% >= 80%] for 0s — will act in 10s.
+[1;33m[WARN][0m  2026-04-01 00:08:55 — PID 101427 (yes) over threshold [CPU=99% >= 80%] for 2s — will act in 8s.
+[1;33m[WARN][0m  2026-04-01 00:08:57 — PID 101427 (yes) over threshold [CPU=100% >= 80%] for 4s — will act in 6s.
+[1;33m[WARN][0m  2026-04-01 00:08:59 — PID 101427 (yes) over threshold [CPU=100% >= 80%] for 6s — will act in 4s.
+[1;33m[WARN][0m  2026-04-01 00:09:01 — PID 101427 (yes) over threshold [CPU=100% >= 80%] for 8s — will act in 2s.
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:03] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=10s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:05] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=12s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:07] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=14s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:09] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=16s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:11] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=18s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:13] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=20s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:15] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=22s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:17] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=24s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:19] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=26s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:21] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=28s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:23] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=30s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:25] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=32s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:27] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=34s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:29] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=36s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:31] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=38s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:33] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=40s | REASON=CPU=100% >= 80%
+[1;33m[DRY-RUN][0m [2026-04-01 00:09:35] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=42s | REASON=CPU=100% >= 80%
+^C[0;36m[INFO][0m  2026-04-01 00:09:36 — Shutting down procgov. Goodbye.
+[1m[7m%[27m[1m[0m                                                                                ]2;pasel@KoJo:/mnt/c/Users/pasel/OneDrive/Desktop/DevOps_Projects/Linux_SysAdmin/Process-Manager-Resource-Governor]1;..urce-Governor]7;file://KoJo/mnt/c/Users/pasel/OneDrive/Desktop/DevOps_Projects/Linux_SysAdmin/Process-Manager-Resource-Governor\[0m[27m[24m[J[01;32m➜  [36mProcess-Manager-Resource-Governor[00m [01;34mgit:([31mmain[34m) [33m✗[00m [K[?1h=[?2004heexit[?1l>[?2004l
+]2;exit]1;exit
+Script done on 2026-04-01 00:09:43+02:00 [COMMAND_EXIT_CODE="0"]

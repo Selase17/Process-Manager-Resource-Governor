@@ -1,0 +1,32 @@
+# =============================================================================
+# whitelist.txt — Protected Processes for procgov.sh
+# =============================================================================
+# One process name per line (must match the NAME column from `ps -o comm`).
+# These processes will NEVER be killed regardless of resource usage.
+# Lines starting with # are comments and are ignored.
+# =============================================================================
+
+# Core system processes — killing these would destabilise or crash the system
+systemd
+init
+sshd
+bash
+sh
+
+# Common system daemons
+cron
+rsyslogd
+dbus-daemon
+NetworkManager
+containerd
+dockerd
+
+
+# Monitoring tool internals — these are spawned by procgov.sh itself
+ps
+awk
+sleep
+
+# Add your own protected processes below this line
+
+
