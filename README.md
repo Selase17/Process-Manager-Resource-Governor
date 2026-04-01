@@ -195,6 +195,12 @@ sudo systemctl status procgov
 
 ## Notes
 
-- The script tracks processes by PID + name. If a PID is reused by a different process, the timer resets automatically.
-- A process that briefly spikes and drops back below the threshold has its timer reset — it must stay over the threshold continuously for the full duration.
-- Running without `sudo` is allowed but will produce a warning; some system processes may not be visible.
+- The script tracks processes by PID + name. If a PID is reused by a different 
+  process, the timer resets automatically.
+- A process that briefly spikes and drops back below the threshold has its timer 
+  reset — it must stay over the threshold continuously for the full duration.
+- Running without `sudo` is allowed but will produce a warning; some system 
+  processes may not be visible.
+- **Desktop notifications** via `notify-send` work on native Linux desktops. 
+  On WSL, the binary is present but no notification daemon is running — 
+  notifications are silently skipped without affecting any other functionality.
