@@ -48,12 +48,12 @@ WHITELIST_FILE="whitelist.txt"
 LOG_FILE="procgov.log"
 
 # Colour codes for terminal output
-RED='\033[0;31m'
-YELLOW='\033[1;33m'
-GREEN='\033[0;32m'
-CYAN='\033[0;36m'
-BOLD='\033[1m'
-RESET='\033[0m'
+RED=$'\033[0;31m'
+YELLOW=$'\033[1;33m'
+GREEN=$'\033[0;32m'
+CYAN=$'\033[0;36m'
+BOLD=$'\033[1m'
+RESET=$'\033[0m'
 
 # =============================================================================
 # STEP 2 — STATE TRACKING SETUP
@@ -389,7 +389,9 @@ kill_process() {
 
     if [[ "$DRY_RUN" == true ]]; then
         dry_run_report "$pid" "$name" "$cpu" "$mem" "$ELAPSED_SECONDS" "$reason"
-        # In dry-run mode, remove from tracking so we don't keep reporting it every cycle
+        # Remove from tracking so we don't keep reporting it every cycle
+        unset "over_threshold_since[$pid]"
+        unset "tracked_name[$pid]"
         return
     fi
 
@@ -554,8 +556,7 @@ weekly_summary() {
 # =============================================================================
 
 usage() {
-    cat <<EOF
-
+    echo -e "
 ${BOLD}procgov.sh${RESET} v${SCRIPT_VERSION} — Process Manager & Resource Governor
 
 ${BOLD}USAGE:${RESET}
@@ -579,8 +580,7 @@ ${BOLD}EXAMPLES:${RESET}
   sudo bash procgov.sh --dry-run --interval 2
   sudo bash procgov.sh --config /etc/procgov.conf --log /var/log/procgov.log
   bash procgov.sh --summary --log /var/log/procgov.log
-
-EOF
+"
 }
 
 # =============================================================================
