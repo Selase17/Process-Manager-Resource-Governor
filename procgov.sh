@@ -38,7 +38,7 @@ readonly SCRIPT_VERSION="1.0.0"   # Version of the script
 # Default thresholds — all overridable via config file or CLI flags
 CPU_THRESHOLD=80        # Kill if CPU% exceeds this...
 MEM_THRESHOLD=70        # ...or MEM% exceeds this...
-DURATION=30             # ...for longer than this many seconds
+DURATION=30             # ...for longer than this many seconds         
 INTERVAL=5              # Poll every N seconds
 DRY_RUN=false           # When true: report only, never kill
 
