@@ -1,5 +1,7 @@
 # Process Manager & Resource Governor
 
+![Demo](demo.gif)
+
 A Bash watchdog daemon that monitors running processes and automatically kills any process that exceeds configurable CPU or memory thresholds for longer than a set duration. Every kill action is logged with a timestamp, PID, process name, and reason.
 
 ---
