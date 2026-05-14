@@ -1,109 +1,0 @@
-Script started on 2026-04-01 11:03:37+02:00 [TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="80" LINES="45"]
-[1m[7m%[27m[1m[0m                                                                                ]2;pasel@KoJo:/mnt/c/Users/pasel/OneDrive/Desktop/DevOps_Projects/Linux_SysAdmin/Process-Manager-Resource-Governor]1;..urce-Governor]7;file://KoJo/mnt/c/Users/pasel/OneDrive/Desktop/DevOps_Projects/Linux_SysAdmin/Process-Manager-Resource-Governor\[0m[27m[24m[J[01;32m➜  [36mProcess-Manager-Resource-Governor[00m [K[?1h=[?2004h[0m[27m[24m[J[01;32m➜  [36mProcess-Manager-Resource-Governor[00m [01;34mgit:([31mmain[34m) [33m✗[00m [K../procgov.sh --help[?1l>[?2004l
-]2;./procgov.sh --help]1;./procgov.sh
-\033[1mprocgov.sh\033[0m v1.0.0 — Process Manager & Resource Governor
-
-\033[1mUSAGE:\033[0m
-  sudo bash procgov.sh [OPTIONS]
-
-\033[1mOPTIONS:\033[0m
-  --cpu <percent>       CPU threshold % before tracking starts     (default: 80)
-  --mem <percent>       Memory threshold % before tracking starts  (default: 70)
-  --duration <seconds>  Seconds over threshold before kill         (default: 30)
-  --interval <seconds>  Polling interval in seconds                (default: 5)
-  --config <file>       Path to config file                        (default: procgov.conf)
-  --whitelist <file>    Path to whitelist file                     (default: whitelist.txt)
-  --log <file>          Path to log file                           (default: procgov.log)
-  --dry-run             Report what WOULD be killed, without acting
-  --summary             Print a weekly kill summary from the log and exit
-  --help                Show this help message
-
-\033[1mEXAMPLES:\033[0m
-  sudo bash procgov.sh
-  sudo bash procgov.sh --cpu 90 --mem 80 --duration 60
-  sudo bash procgov.sh --dry-run --interval 2
-  sudo bash procgov.sh --config /etc/procgov.conf --log /var/log/procgov.log
-  bash procgov.sh --summary --log /var/log/procgov.log
-
-[1m[7m%[27m[1m[0m                                                                                ]2;pasel@KoJo:/mnt/c/Users/pasel/OneDrive/Desktop/DevOps_Projects/Linux_SysAdmin/Process-Manager-Resource-Governor]1;..urce-Governor]7;file://KoJo/mnt/c/Users/pasel/OneDrive/Desktop/DevOps_Projects/Linux_SysAdmin/Process-Manager-Resource-Governor\[0m[27m[24m[J[01;32m➜  [36mProcess-Manager-Resource-Governor[00m [01;34mgit:([31mmain[34m) [33m✗[00m [K[?1h=[?2004hssudo ./procgov.sh --dry-run -- [Kdduration 10 --interval 2[?1l>[?2004l
-]2;sudo ./procgov.sh --dry-run --duration 10 --interval 2]1;./procgov.sh[sudo] password for pasel: 
-[0;36m[INFO][0m  2026-04-01 11:05:08 — Loading config from 'procgov.conf'...
-[0;36m[INFO][0m  2026-04-01 11:05:08 — Loading whitelist from 'whitelist.txt'...
-[0;36m[INFO][0m  2026-04-01 11:05:08 — Whitelist loaded: 14 protected process(es): systemd init sshd bash sh cron rsyslogd dbus-daemon NetworkManager containerd dockerd ps awk sleep
-[0;36m[INFO][0m  2026-04-01 11:05:08 — Starting process governor. CPU>=80% | MEM>=70% | DURATION=10s | INTERVAL=2s
-[0;36m[INFO][0m  2026-04-01 11:05:08 — Log file: procgov.log
-[1;33m[WARN][0m  2026-04-01 11:05:08 — DRY-RUN mode enabled — no processes will be killed.
-[1;33m[WARN][0m  2026-04-01 11:05:08 — PID 101427 (yes) over threshold [CPU=100% >= 80%] for 0s — will act in 10s.
-[1;33m[WARN][0m  2026-04-01 11:05:10 — PID 101427 (yes) over threshold [CPU=100% >= 80%] for 2s — will act in 8s.
-[1;33m[WARN][0m  2026-04-01 11:05:12 — PID 101427 (yes) over threshold [CPU=100% >= 80%] for 4s — will act in 6s.
-[1;33m[WARN][0m  2026-04-01 11:05:14 — PID 101427 (yes) over threshold [CPU=100% >= 80%] for 6s — will act in 4s.
-[1;33m[WARN][0m  2026-04-01 11:05:16 — PID 101427 (yes) over threshold [CPU=100% >= 80%] for 8s — will act in 2s.
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:18] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=10s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:20] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=12s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:22] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=14s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:24] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=16s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:26] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=18s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:28] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=20s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:30] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=22s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:32] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=24s | REASON=CPU=100% >= 80%
-[1;33m[WARN][0m  2026-04-01 11:05:32 — PID 106918 (yes) over threshold [CPU=99% >= 80%] for 0s — will act in 10s.
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:34] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=26s | REASON=CPU=100% >= 80%
-[1;33m[WARN][0m  2026-04-01 11:05:34 — PID 106918 (yes) over threshold [CPU=99% >= 80%] for 2s — will act in 8s.
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:36] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=28s | REASON=CPU=100% >= 80%
-[1;33m[WARN][0m  2026-04-01 11:05:36 — PID 106918 (yes) over threshold [CPU=99% >= 80%] for 4s — will act in 6s.
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:38] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=30s | REASON=CPU=100% >= 80%
-[1;33m[WARN][0m  2026-04-01 11:05:38 — PID 106918 (yes) over threshold [CPU=100% >= 80%] for 6s — will act in 4s.
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:40] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=32s | REASON=CPU=100% >= 80%
-[1;33m[WARN][0m  2026-04-01 11:05:40 — PID 106918 (yes) over threshold [CPU=99% >= 80%] for 8s — will act in 2s.
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:42] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=34s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:42] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=10s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:44] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=36s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:44] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=12s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:46] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=38s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:46] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=14s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:48] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=40s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:48] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=16s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:50] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=42s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:50] WOULD KILL | PID=106918 | NAME=yes | CPU=100% | MEM=0% | DURATION=18s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:52] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=44s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:52] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=20s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:54] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=46s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:54] WOULD KILL | PID=106918 | NAME=yes | CPU=100% | MEM=0% | DURATION=22s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:57] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=49s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:57] WOULD KILL | PID=106918 | NAME=yes | CPU=100% | MEM=0% | DURATION=25s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:59] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=51s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:05:59] WOULD KILL | PID=106918 | NAME=yes | CPU=100% | MEM=0% | DURATION=27s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:01] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=53s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:01] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=29s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:03] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=55s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:03] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=31s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:05] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=57s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:05] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=33s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:07] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=59s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:07] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=35s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:09] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=61s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:09] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=37s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:11] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=63s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:11] WOULD KILL | PID=106918 | NAME=yes | CPU=100% | MEM=0% | DURATION=39s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:13] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=65s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:13] WOULD KILL | PID=106918 | NAME=yes | CPU=100% | MEM=0% | DURATION=41s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:15] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=67s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:15] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=43s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:17] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=69s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:17] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=45s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:19] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=71s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:19] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=47s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:21] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=73s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:21] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=49s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:23] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=75s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:23] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=51s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:25] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=77s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:25] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=53s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:27] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=79s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:27] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=55s | REASON=CPU=99% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:29] WOULD KILL | PID=101427 | NAME=yes | CPU=100% | MEM=0% | DURATION=81s | REASON=CPU=100% >= 80%
-[1;33m[DRY-RUN][0m [2026-04-01 11:06:29] WOULD KILL | PID=106918 | NAME=yes | CPU=99% | MEM=0% | DURATION=57s | REASON=CPU=99% >= 80%
-^C[0;36m[INFO][0m  2026-04-01 11:06:30 — Shutting down procgov. Goodbye.
-[1m[7m%[27m[1m[0m                                                                                ]2;pasel@KoJo:/mnt/c/Users/pasel/OneDrive/Desktop/DevOps_Projects/Linux_SysAdmin/Process-Manager-Resource-Governor]1;..urce-Governor]7;file://KoJo/mnt/c/Users/pasel/OneDrive/Desktop/DevOps_Projects/Linux_SysAdmin/Process-Manager-Resource-Governor\[0m[27m[24m[J[01;32m➜  [36mProcess-Manager-Resource-Governor[00m [01;34mgit:([31mmain[34m) [33m✗[00m [K[?1h=[?2004heexit[?1l>[?2004l
-]2;exit]1;exit
-Script done on 2026-04-01 11:06:34+02:00 [COMMAND_EXIT_CODE="0"]
