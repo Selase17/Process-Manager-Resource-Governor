@@ -1,5 +1,10 @@
 # Process Manager & Resource Governor
 
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
+![Shell](https://img.shields.io/badge/Shell-Bash-4EAA25.svg?logo=gnubash&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-Linux-FCC624.svg?logo=linux&logoColor=black)
+![Status](https://img.shields.io/badge/Status-Stable-success.svg)
+
 
 ![Demo](demo.gif)
 
@@ -207,3 +212,35 @@ sudo systemctl status procgov
 - **Desktop notifications** via `notify-send` work on native Linux desktops. 
   On WSL, the binary is present but no notification daemon is running — 
   notifications are silently skipped without affecting any other functionality.
+
+---
+
+## What I Learned
+
+Building this project pushed me deeper into several practical areas of systems programming and Linux administration:
+
+- **Reading `/proc` is faster and more reliable than parsing `ps` output.** Initial versions called `ps aux` and parsed columns — fragile and slow. Switching to direct `/proc/[pid]/stat` reads cut CPU overhead and removed dependency on `ps` output format quirks.
+
+- **CPU percentage calculation is not what it looks like.** A single sample of `%CPU` from `/proc` is meaningless — you need two samples over a time delta. Implementing this taught me what tools like `top` actually do under the hood.
+
+- **Idempotent kill logic matters.** Without a sustained-duration check, a process spiking briefly would get killed unfairly. Adding the N-second threshold required tracking state across iterations — small change, big behavioural improvement.
+
+- **Logging is part of the product.** A tool that kills processes without explaining why is a tool nobody trusts. Structured logs with timestamp, PID, command, threshold, and reason became as important as the kill logic itself.
+
+- **systemd integration changes how you write scripts.** Designing the script to run as a systemd service (instead of cron) forced cleaner signal handling, proper exit codes, and stdout/stderr behaviour that journald can capture.
+
+- **Dry-run mode is non-negotiable for destructive tools.** I wrote it after almost killing my own desktop environment during development. Anything that does irreversible actions needs a `--dry-run` from day one.
+
+--- 
+
+## Production Hardening Checklist
+
+This project demonstrates the core mechanic. For real production use, the following would need to be added:
+
+- [ ] Configurable allowlist of processes to never kill (e.g. `systemd`, `sshd`, critical daemons)
+- [ ] Rate limiting on kill actions (e.g. max N kills per minute, to prevent cascading failures)
+- [ ] Metrics endpoint (Prometheus-compatible) exposing kill counts, threshold breaches, and uptime
+- [ ] Centralised log shipping (rsyslog or Fluent Bit forwarding to ELK / Loki)
+- [ ] Alerting integration (PagerDuty / Slack webhook on kill events for critical processes)
+- [ ] Configuration validation at startup (fail fast on malformed thresholds rather than at runtime)
+- [ ] Multi-tenant config (different threshold profiles for different process groups)

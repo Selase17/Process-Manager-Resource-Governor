@@ -1,0 +1,22 @@
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Test output
+/tmp/
+test-output/
+
+timing.log
+
+typescript 
+
+procgov.ps1
